@@ -15,25 +15,20 @@ class _HomePageState extends State<HomePage> {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: TextField(
-            controller: textController,
-          ),
-          actions: [
-            ElevatedButton(
-                onPressed: () {
-                  if (docID == null) {
-
-                  } else {
-
-                  }
-                  textController.clear();
-                  Navigator.pop(context);
-                },
-                child: const Text('Add')
-            )
-          ],
-        )
-    );
+              title: TextField(
+                controller: textController,
+              ),
+              actions: [
+                ElevatedButton(
+                    onPressed: () {
+                      if (docID == null) {
+                      } else {}
+                      textController.clear();
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Add'))
+              ],
+            ));
   }
 
   @override
@@ -41,15 +36,15 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
-       backgroundColor: Colors.grey[350],
-       centerTitle: true,
-       title: const Text(
-           'Заметки',
-         style: TextStyle(
-           fontWeight: FontWeight.w300,
-         ),
-       ),
-     ),
+        backgroundColor: Colors.grey[350],
+        centerTitle: true,
+        title: const Text(
+          'Заметки',
+          style: TextStyle(
+            fontWeight: FontWeight.w300,
+          ),
+        ),
+      ),
       body: StreamBuilder<QuerySnapshot>(
         stream: null,
         builder: (context, snapshot) {
@@ -62,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                   String docID = document.id;
 
                   Map<String, dynamic> data =
-                      document.data() as  Map<String, dynamic>;
+                      document.data() as Map<String, dynamic>;
                   String noteText = data['info'];
 
                   return ListTile(
@@ -71,17 +66,15 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         IconButton(
                             onPressed: () => null,
-                            icon: const Icon(Icons.settings)
-                        ),
+                            icon: const Icon(Icons.settings)),
                         IconButton(
                             onPressed: () => null,
-                            icon: const Icon(Icons.delete, color: Colors.redAccent)
-                        ),
+                            icon: const Icon(Icons.delete,
+                                color: Colors.redAccent)),
                       ],
                     ),
                   );
-                }
-            );
+                });
           } else {
             return const Text('Нету Заметок');
           }
@@ -90,19 +83,12 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.grey[350],
         elevation: 2,
-        onPressed: () {
-          
-        },
+        onPressed: () {},
         child: IconButton(
-            onPressed: () {
-              
-            },
-            icon: const Icon(
-                Icons.add,
-                color: Colors.grey
-            ),
+          onPressed: () {},
+          icon: const Icon(Icons.add, color: Colors.grey),
         ),
-      ),    
+      ),
     );
   }
 }
