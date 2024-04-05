@@ -10,8 +10,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-
+    return Scaffold(
+      backgroundColor: Colors.grey[300],
+     appBar: AppBar(
+       backgroundColor: Colors.grey[350],
+       centerTitle: true,
+       title: const Text(
+           'Заметки',
+         style: TextStyle(
+           fontWeight: FontWeight.w300,
+         ),
+       ),
+     ),
     );
   }
 }
