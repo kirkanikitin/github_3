@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:github_3/logic/firestore.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -9,6 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final Firestore firestore = Firestore();
   final textController = TextEditingController();
 
   void openNoteBox({String? docID}) {
@@ -22,7 +24,10 @@ class _HomePageState extends State<HomePage> {
                 ElevatedButton(
                     onPressed: () {
                       if (docID == null) {
-                      } else {}
+                        firestore.addNote(textController.text);
+                      } else {
+                        firestore.updateNote(docID, textController.text);
+                      }
                       textController.clear();
                       Navigator.pop(context);
                     },
@@ -38,6 +43,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.grey[350],
         centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.grey[600]),
         title: const Text(
           'Заметки',
           style: TextStyle(
@@ -46,32 +52,42 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: null,
+        stream: firestore.getNotesStream(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List noteList = snapshot.data!.docs;
             return ListView.builder(
-                itemCount: null,
+                itemCount: noteList.length,
                 itemBuilder: (context, index) {
                   DocumentSnapshot document = noteList[index];
                   String docID = document.id;
 
                   Map<String, dynamic> data =
                       document.data() as Map<String, dynamic>;
-                  String noteText = data['info'];
+                  String noteText = data['note'];
 
-                  return ListTile(
-                    title: Text(noteText),
-                    trailing: Row(
-                      children: [
-                        IconButton(
-                            onPressed: () => null,
-                            icon: const Icon(Icons.settings)),
-                        IconButton(
-                            onPressed: () => null,
-                            icon: const Icon(Icons.delete,
-                                color: Colors.redAccent)),
-                      ],
+                  return Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blueGrey),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: ListTile(
+                        title: Text(noteText),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                                onPressed: () => openNoteBox(docID: docID),
+                                icon: const Icon(Icons.settings)),
+                            IconButton(
+                                onPressed: () => firestore.deleteNote(docID),
+                                icon: const Icon(Icons.delete,
+                                    color: Colors.redAccent)),
+                          ],
+                        ),
+                      ),
                     ),
                   );
                 });
@@ -84,10 +100,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.grey[350],
         elevation: 2,
         onPressed: () {},
-        child: IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.add, color: Colors.grey),
-        ),
+        child: const Icon(Icons.add, color: Colors.grey),
       ),
     );
   }
