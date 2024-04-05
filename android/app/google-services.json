@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "370279475569",
+    "project_id": "github-5c488",
+    "storage_bucket": "github-5c488.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370279475569:android:6cb3c8fcfb80e33f332ed0",
+        "android_client_info": {
+          "package_name": "com.niksay.github"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjTgZx3_obN-sQkzIEV0NX__qD5FcNUEs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370279475569:android:3b23b93ca9647072332ed0",
+        "android_client_info": {
+          "package_name": "com.niksay.github_3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjTgZx3_obN-sQkzIEV0NX__qD5FcNUEs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
